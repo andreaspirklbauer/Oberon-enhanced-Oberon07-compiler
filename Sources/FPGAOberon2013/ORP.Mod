@@ -638,7 +638,9 @@ MODULE ORP; (*N. Wirth 1.7.97 / 8.3.2020  Oberon compiler for RISC in Oberon-07 
       ELSIF sym = ORS.case THEN
         ORS.Get(sym);
         IF sym = ORS.ident THEN obj := ORB.thisObj() END ;
-        IF (obj # NIL) & ((obj.type.form = ORB.Pointer) OR (obj.type.form = ORB.Record) & (obj.class = ORB.Par)) THEN TypeCasePart
+        IF (obj # NIL) &
+          ((obj.type.form = ORB.Pointer) & (obj.type.base.form = ORB.Record) OR
+           (obj.type.form = ORB.Record) & (obj.class = ORB.Par)) THEN TypeCasePart
         ELSE NumericCasePart
         END ;
         Check(ORS.end, "no END")
